@@ -1,29 +1,35 @@
-// smokeTest.js
-describe('Auction app smoke test', function() {
-    var EC = protractor.ExpectedConditions;
+var LoginPage = require("../pages/LoginPage.js");
+var Page = require("../pages/Page.js");
+var ProductPage = require("../pages/ProductPage.js");
+var Data = require("../data/Data.js");
+var HomePage = require("../pages/homePage.js");
+var SearchPage = require("../pages/SearchPage.js");
 
-    beforeEach(function() {
+const homePage = new HomePage();
+const loginPage = new LoginPage();
+const data = new Data();
+const searchPage = new SearchPage();
+const productPage = new ProductPage();
+const page = new Page();
+
+describe('Smoke test', function() {
+
+  beforeEach(function() {
       browser.ignoreSynchronization = true;
+      browser.manage().window().maximize();
       browser.get('https://auctionare.herokuapp.com/');
     });
 
-    var data = require('./data/data.js');
-    var homePage = require('./pages/homePage.js');
-    var loginPage = require('./pages/loginPage.js');
-    var productPage = require('./pages/productPage.js');
-    
-    it('smoke test', function() {
+    it('should verify that user is able to sign in, navigate through the application, select an item and place a bid', function() {
+      homePage.clickLoginBtn();
+      loginPage.logInWithValidCredentials(data.validEmail, data.validPassword);
+      homePage.search('women \n');
 
-      homePage.loginButton.click();
+      page.sleep(2000);
+      searchPage.firstProduct.click();
 
-      loginPage.email.sendKeys(data.email);
-      loginPage.password.sendKeys(data.password);
-      loginPage.submitButton.click();
-
-      homePage.firstProduct.click();
-
-      productPage.bidAmount.sendKeys(productPage.currentPriceFloat + 1);
-      productPage.placeBidButton.click();
-      expect(productPage.successMessage.toEqual(data.successMessage));
+      productPage.setBidAmount();
+      productPage.checkSuccessMessage();    
     });
-  });
+    
+ });

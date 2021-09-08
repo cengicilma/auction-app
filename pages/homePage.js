@@ -1,6 +1,21 @@
-var homePage = function() {
-    this.loginButton = element(by.linkText('Login'));
-    this.firstProduct = element(by.xpath('//*[@id="new-arrivals"]/app-grid-layout/div/div[1]/app-grid-item/div'));
+var Page = require("../pages/Page.js");
+
+class HomePage extends Page {
+    //Getters
+    get loginButton() { return browser.driver.findElement(by.id('login-link')); }
+    get searchInput() { return browser.driver.findElement(by.id('product-search-input')); }
+    get searchButton() { return browser.driver.findElement(by.id('search-icon')); }
+
+    //Actions
+    clickLoginBtn() {
+        this.sleep(2000);
+        this.loginButton.click();
+    }
+
+    search(text) {
+        this.sleep(2000);
+        this.searchInput.sendKeys(text);
+    }
 }
 
-module.exports = new homePage();
+module.exports = HomePage;

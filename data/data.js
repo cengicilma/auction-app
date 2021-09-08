@@ -1,10 +1,10 @@
-var data = function() {
-    this.email = 'ilma.cengic@gmail.com';
-    this.password = 'password1234';
-    //this.userName = 'Ilma Cengic';
-
-    this.succesMessage = 'Congrats, you are the highest bidder!';
-
+//Data.js
+class Data {
+    validEmail = "ilma.cengic@gmail.com";
+    validPassword = "password1234";
+    succesMessage = "Congrats, you are the highest bidder!";
+    
+    constructor() {}
 }
 
-module.exports = new data();
+module.exports = Data;
