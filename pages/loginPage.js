@@ -10,9 +10,8 @@ class LoginPage extends Page {
     //Actions
     logInWithValidCredentials(email, password) {
         return this.emailField.sendKeys(email)
-                .then(() => this.passwordFiled.sendKeys(password) 
-                .then(() => this.submitButton.click())
-        )
+            .then(() => this.passwordFiled.sendKeys(password))
+            .then(() => this.submitButton.click());        
     }
 
 }
