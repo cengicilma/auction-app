@@ -8,13 +8,12 @@ class HomePage extends Page {
 
     //Actions
     clickLoginBtn() {
-        this.sleep(2000);
-        this.loginButton.click();
+        return this.loginButton.click();
     }
 
     search(text) {
-        this.sleep(2000);
-        this.searchInput.sendKeys(text);
+        return this.searchInput.sendKeys(text)
+            .then(() => this.searchButton.click());
     }
 }
 

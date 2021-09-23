@@ -13,6 +13,7 @@ const productPage = new ProductPage();
 const page = new Page();
 
 describe('Smoke test', function() {
+  var EC = protractor.ExpectedConditions;
 
   beforeEach(function() {
       browser.ignoreSynchronization = true;
@@ -21,15 +22,14 @@ describe('Smoke test', function() {
     });
 
     it('should verify that user is able to sign in, navigate through the application, select an item and place a bid', function() {
-      homePage.clickLoginBtn();
-      loginPage.logInWithValidCredentials(data.validEmail, data.validPassword);
-      homePage.search('women \n');
-
-      page.sleep(2000);
-      searchPage.firstProduct.click();
-
-      productPage.setBidAmount();
-      productPage.checkSuccessMessage();    
+      homePage.clickLoginBtn()
+        .then(() => loginPage.logInWithValidCredentials(data.validEmail, data.validPassword))
+        .then(() => page.sleep(5000))
+        .then(() => homePage.search('women'))
+        .then(() => page.sleep(5000))
+        .then(() => searchPage.firstProductClick())
+        .then(() => page.sleep(5000))
+        .then(() => productPage.setBidAmount())
+        .then(() => productPage.clickPlaceBidBtn());
     });
-    
  });

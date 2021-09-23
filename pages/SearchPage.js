@@ -6,8 +6,7 @@ class SearchPage extends Page {
 
     //Actions
     firstProductClick() {
-        this.sleep(3000);
-        this.firstProduct.click();
+        return this.firstProduct.click()
     }
     
 }
